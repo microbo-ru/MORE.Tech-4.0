@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class UserController {
@@ -47,5 +49,10 @@ public class UserController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new ApiResponse(true, "Wallet properties are saved." ));
+    }
+
+    @GetMapping("/user/charity")
+    public List<User> getCharityUsers() {
+        return userRepository.findAll().stream().filter(User::isCharity).collect(Collectors.toList());
     }
 }

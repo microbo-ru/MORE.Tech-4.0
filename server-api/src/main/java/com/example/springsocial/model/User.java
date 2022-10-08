@@ -39,6 +39,16 @@ public class User {
 
     private String walletPrivateKey;
 
+    private boolean isCharity;
+
+    public boolean isCharity() {
+        return isCharity;
+    }
+
+    public void setCharity(boolean charity) {
+        isCharity = charity;
+    }
+
     public Long getId() {
         return id;
     }
