@@ -35,10 +35,6 @@ public class User {
 
     private String providerId;
 
-    private String walletPublicKey;
-
-    private String walletPrivateKey;
-
     public Long getId() {
         return id;
     }
@@ -101,21 +97,5 @@ public class User {
 
     public void setProviderId(String providerId) {
         this.providerId = providerId;
-    }
-
-    public String getWalletPublicKey() {
-        return this.walletPublicKey;
-    }
-
-    public void setWalletPublicKey(String walletPublicKey) {
-        this.walletPublicKey = walletPublicKey;
-    }
-
-    public String getWalletPrivateKey() {
-        return this.walletPrivateKey;
-    }
-
-    public void setWalletPrivateKey(String walletPrivateKey) {
-        this.walletPrivateKey = walletPrivateKey;
     }
 }
