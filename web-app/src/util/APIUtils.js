@@ -34,6 +34,14 @@ export function getCurrentUser() {
     });
 }
 
+export function wallet(walletRequest) {
+    return request({
+        url: API_BASE_URL + "/user/wallet",
+        method: 'POST',
+        body: JSON.stringify(walletRequest)
+    });
+}
+
 export function login(loginRequest) {
     return request({
         url: API_BASE_URL + "/auth/login",
