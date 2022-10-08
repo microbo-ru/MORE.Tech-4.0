@@ -15,6 +15,12 @@ class AppHeader extends Component {
                                 { this.props.authenticated ? (
                                     <ul>
                                         <li>
+                                            <NavLink to="/repos">Repos</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="/hot-tasks">Hot tasks</NavLink>
+                                        </li>
+                                        <li>
                                             <NavLink to="/profile">Profile</NavLink>
                                         </li>
                                         <li>
@@ -24,10 +30,16 @@ class AppHeader extends Component {
                                 ): (
                                     <ul>
                                         <li>
-                                            <NavLink to="/login">Login</NavLink>        
+                                            <NavLink to="/repos">Repos</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to="/signup">Signup</NavLink>        
+                                            <NavLink to="/hot-tasks">Hot tasks</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="/login">Login</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="/signup">Signup</NavLink>
                                         </li>
                                     </ul>
                                 )}

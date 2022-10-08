@@ -57,3 +57,10 @@ export function signup(signupRequest) {
         body: JSON.stringify(signupRequest)
     });
 }
+
+export function getStatistics() {
+    return request({
+        url: API_BASE_URL + "/stats",
+        method: 'GET'
+    });
+}

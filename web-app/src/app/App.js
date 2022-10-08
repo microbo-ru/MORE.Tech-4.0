@@ -18,6 +18,10 @@ import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './App.css';
+import HotTasks from "../hot-tasks/HotTasks";
+import Repos from "../repos/Repos";
+
+import 'semantic-ui-css/semantic.min.css'
 
 class App extends Component {
   constructor(props) {
@@ -72,7 +76,11 @@ class App extends Component {
         </div>
         <div className="app-body">
           <Switch>
-            <Route exact path="/" component={Home}></Route>           
+            <Route exact path="/" component={Home}></Route>
+            <Route path="/repos"
+                   render={(props) => <Repos authenticated={this.state.authenticated} {...props} />}></Route>
+            <Route path="/hot-tasks"
+                   render={(props) => <HotTasks authenticated={this.state.authenticated} {...props} />}></Route>
             <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={Profile}></PrivateRoute>
             <Route path="/login"
