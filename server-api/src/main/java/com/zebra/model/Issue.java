@@ -33,13 +33,21 @@ public class Issue {
 
     private String issueBody;
 
-    private Long zebraAmount;
+    private String issueTitle;
 
-    public Long getZebraAmount() {
+    private double zebraAmount;
+
+    private String zebraCommentUrl;
+
+    private String zebraCommentHtmlUrl;
+
+    private String zebraCommentId;
+
+    public double getZebraAmount() {
         return zebraAmount;
     }
 
-    public void setZebraAmount(Long zebraAmount) {
+    public void setZebraAmount(double zebraAmount) {
         this.zebraAmount = zebraAmount;
     }
 
@@ -137,5 +145,35 @@ public class Issue {
 
     public void setIssueBody(String issueBody) {
         this.issueBody = issueBody;
+    }
+
+    public String getIssueTitle() {return issueTitle;}
+
+    public void setIssueTitle(String issueTitle) {
+        this.issueTitle = issueTitle;
+    }
+
+    public String getZebraCommentUrl() {
+        return zebraCommentUrl;
+    }
+
+    public void setZebraCommentUrl(String zebraCommentUrl) {
+        this.zebraCommentUrl = zebraCommentUrl;
+    }
+
+    public String getZebraCommentHtmlUrl() {
+        return zebraCommentHtmlUrl;
+    }
+
+    public void setZebraCommentHtmlUrl(String zebraCommentHtmlUrl) {
+        this.zebraCommentHtmlUrl = zebraCommentHtmlUrl;
+    }
+
+    public String getZebraCommentId() {
+        return zebraCommentId;
+    }
+
+    public void setZebraCommentId(String zebraCommentId) {
+        this.zebraCommentId = zebraCommentId;
     }
 }
