@@ -43,6 +43,7 @@ public class IssueController {
                 ours.setIssueAssignee(issue.getIssueAssignee());
                 ours.setIssueBody(issue.getIssueBody());
                 ours.setIssueTitle(issue.getIssueTitle());
+                ours.setZebraAmount(issue.getZebraAmount());
 
                 // there shouldn't be other changes
                 // as they are Ids

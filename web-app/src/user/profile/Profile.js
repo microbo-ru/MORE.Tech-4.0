@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { wallet } from '../../util/APIUtils';
 import './Profile.css';
 import Alert from 'react-s-alert';
-import {Divider} from "semantic-ui-react";
+import {Divider, Button, Icon} from "semantic-ui-react";
 
 class Profile extends Component {
     constructor(props) {
@@ -65,6 +65,13 @@ class Profile extends Component {
                         </div>
 
                         <Divider/>
+
+                        <Button animated='vertical'>
+                            <Button.Content visible>Create Wallet</Button.Content>
+                            <Button.Content hidden><Icon name='bitcoin' /></Button.Content>
+                        </Button>
+
+                        <Divider horizontal> OR use existing wallet </Divider>
                         
                         <form onSubmit={this.handleSubmit}>
                             <div className="form-item">
