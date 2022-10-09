@@ -64,3 +64,10 @@ export function getStatistics() {
         method: 'GET'
     });
 }
+
+export function getIssues() {
+    return request({
+        url: API_BASE_URL + "/issues",
+        method: 'GET'
+    });
+}
