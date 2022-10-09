@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { wallet } from '../../util/APIUtils';
 import './Profile.css';
 import Alert from 'react-s-alert';
+import {Divider} from "semantic-ui-react";
 
 class Profile extends Component {
     constructor(props) {
@@ -62,16 +63,20 @@ class Profile extends Component {
                            <h2>{this.props.currentUser.name}</h2>
                            <p className="profile-email">{this.props.currentUser.email}</p>
                         </div>
+
+                        <Divider/>
                         
                         <form onSubmit={this.handleSubmit}>
                             <div className="form-item">
+                            <label>Wallet public key</label>
                             <input type="walletPublicKey" name="walletPublicKey" 
-                                className="form-control" placeholder="walletPublicKey"
+                                className="form-control" placeholder="Wallet Public Key"
                                 value={this.state.walletPublicKey} onChange={this.handleInputChange}/>
                             </div>
                             <div className="form-item">
+                            <label>Wallet private key</label>
                             <input type="walletPrivateKey" name="walletPrivateKey" 
-                                className="form-control" placeholder="walletPrivateKey"
+                                className="form-control" placeholder="Wallet Private Key"
                                 value={this.state.walletPrivateKey} onChange={this.handleInputChange}/>
                             </div>
                             <div className="form-item">
