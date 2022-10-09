@@ -11,6 +11,8 @@ public class Issue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private long issueId;
+
     private String issueUrl;
 
     private String repositoryUrl;
@@ -57,6 +59,14 @@ public class Issue {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIssueId() {
+        return issueId;
+    }
+
+    public void setIssueId(Long issueId) {
+        this.issueId = issueId;
     }
 
     public String getIssueUrl() {
