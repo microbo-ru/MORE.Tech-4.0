@@ -3,7 +3,9 @@ import './HotTasks.css';
 import Alert from 'react-s-alert';
 
 import {Container, Header, Card, Icon, Image, Statistic, Divider} from 'semantic-ui-react'
-import {getStatistics} from "../util/APIUtils";
+import {getIssues, getStatistics} from "../util/APIUtils";
+
+import happyZebra from '../img/a-happy-cartoon-zebra.png';
 
 
 class HotTasks extends Component {
@@ -43,8 +45,26 @@ class HotTasks extends Component {
                         totalAmount: result.totalAmount,
                         inProgress: result.inProgress,
                         teamMembers: result.teamMembers,
+                        isLoaded: true
+                    });
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    this.setState({
                         isLoaded: true,
-                        items: result.items
+                        error
+                    });
+                }
+            )
+
+        // here an Ajax request should happen
+        getIssues()
+            .then(
+                (result) => {
+                    this.setState({
+                        items: result
                     });
                 },
                 // Note: it's important to handle errors here
@@ -68,77 +88,22 @@ class HotTasks extends Component {
             }}/>;            
         }*/
 
-        const { issuesNumber, totalAmount, inProgress, teamMembers, isLoaded } = this.state;
+        const { issuesNumber, totalAmount, inProgress, teamMembers, items, isLoaded } = this.state;
 
-        const items = [
-            {
-                header: 'Readme.md',
-                description:
-                    'Write Readme.md file',
-                meta: '$: 100',
-            },
-            {
-                header: 'New logo',
-                description:
-                    'Create a new logo for the hackathon',
-                meta: '$: 25',
-            },
-            {
-                header: 'New logo',
-                description:
-                    'Create a new logo for the hackathon',
-                meta: '$: 25',
-            },
-            {
-                header: 'New logo',
-                description:
-                    'Create a new logo for the hackathon',
-                meta: '$: 25',
-            },
-            {
-                header: 'Test task for zebra',
-                description:
-                    '/zebra pau 100',
-                meta: '$: 100',
-            },
-            {
-                header: 'Test task for zebra',
-                description:
-                    '/zebra pau 100',
-                meta: '$: 100',
-            },
-            {
-                header: 'Test task for zebra',
-                description:
-                    '/zebra pau 100',
-                meta: '$: 100',
-            },
-            {
-                header: 'Readme.md',
-                description:
-                    'Write Readme.md file',
-                meta: '$: 100',
-            },
-            {
-                header: 'Readme.md',
-                description:
-                    'Write Readme.md file',
-                meta: '$: 100',
-            },
-            {
-                header: 'Readme.md',
-                description:
-                    'Write Readme.md file',
-                meta: '$: 100',
-            },
-        ]
 
         return (
             <Container>
                 <Header as="h2">Hot Tasks to Contribute</Header>
                 <Stats issuesNumber = {issuesNumber} totalAmount = {totalAmount} inProgress = {inProgress} teamMembers = {teamMembers}/>
                 <Divider horizontal>Check out</Divider>
-                <Card.Group items={items} />
+                <Card.Group>
+                    {items.map(item => {
+                        return (
+                            <IssueCard issue = {item}/>
+                        );
+                    })}
+                </Card.Group>
+                <Image src={happyZebra} size='small' floated='right' />
             </Container>
 
         );
@@ -148,28 +113,23 @@ class HotTasks extends Component {
 class Stats extends Component {
     render() {
         return (
-
             <Statistic.Group widths='four'>
-
                 <Statistic>
                     <Statistic.Value>{this.props.issuesNumber}</Statistic.Value>
                     <Statistic.Label>Issues</Statistic.Label>
                 </Statistic>
-
                 <Statistic>
                     <Statistic.Value>
                         <Icon name='ruble' /> {this.props.totalAmount}
                     </Statistic.Value>
                     <Statistic.Label>Total</Statistic.Label>
                 </Statistic>
-
                 <Statistic>
                     <Statistic.Value>
                         <Icon name='play' /> {this.props.inProgress}
                     </Statistic.Value>
                     <Statistic.Label>In progress</Statistic.Label>
                 </Statistic>
-
                 <Statistic>
                     <Statistic.Value>
                         <Image src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' className='circular inline' />
@@ -178,6 +138,23 @@ class Stats extends Component {
                     <Statistic.Label>Team Members</Statistic.Label>
                 </Statistic>
             </Statistic.Group>
+        );
+    }
+}
+
+class IssueCard extends Component {
+    render() {
+        return (
+            <Card
+                href={this.props.issue.issueHtmlUrl}>
+                <Card.Content>
+                    <Card.Header>{this.props.issue.issueTitle} / @{this.props.issue.userLogin}</Card.Header>
+                    <Card.Meta>{this.props.issue.issueState} | {this.props.issue.zebraAmount}</Card.Meta>
+                    <Card.Description>
+                        {this.props.issue.issueBody}
+                    </Card.Description>
+                </Card.Content>
+            </Card>
         );
     }
 }
