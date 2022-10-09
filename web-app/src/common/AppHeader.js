@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './AppHeader.css';
+import {Label} from "semantic-ui-react";
 
 class AppHeader extends Component {
     render() {
@@ -18,7 +19,7 @@ class AppHeader extends Component {
                                             <NavLink to="/repos">Repos</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to="/hot-tasks">Hot tasks</NavLink>
+                                            <NavLink to="/hot-tasks"><Label color="pink" >Hot tasks</Label></NavLink>
                                         </li>
                                         <li>
                                             <NavLink to="/profile">Profile</NavLink>
@@ -33,7 +34,7 @@ class AppHeader extends Component {
                                             <NavLink to="/repos">Repos</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to="/hot-tasks">Hot tasks</NavLink>
+                                            <NavLink to="/hot-tasks"><Label color="pink">Hot tasks</Label></NavLink>
                                         </li>
                                         <li>
                                             <NavLink to="/login">Login</NavLink>
