@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Home.css';
+import {Header} from "semantic-ui-react";
 
 class Home extends Component {
     render() {
@@ -21,7 +22,12 @@ class Home extends Component {
                             <div className="graf-circle"></div>
                         </div>
                     </div>
-                    <h1 className="home-title">Zebra app portal</h1>
+
+                    <Header as='h1'>
+                        Start working on the extra mile.
+                        <br/>
+                        Earn coins and exchange in our marketplace or spent for charity.
+                    </Header>
                 </div>
             </div>
         )
