@@ -5,7 +5,8 @@
 
 module.exports = (app, { getRouter }) => {
 
-  const { check_zebra } = require("./functions");
+  const { check_zebra } = require("./utils/functions");
+  const { openIssue } = require("./utils/api");
 
   // Your code here
   app.log.info("Yay, the app was loaded!");
@@ -22,17 +23,57 @@ module.exports = (app, { getRouter }) => {
 
     if (issueBody != null) {
 
-      const zebraAmount = check_zebra(issueBody);
+      const amount = check_zebra(issueBody);
 
-      if (zebraAmount != null) {
+      if (amount != null) {
+
+        // 1. Write comment
         const issueComment = context.issue({
           body: `An issue #${issueNumber} "${issueTitle}" needs help.\n`+
-              `@${author} is ready to pay *${zebraAmount}* to solve it!`,
+              `@${author} is ready to pay *${amount}* to solve it!`,
         });
 
-        const result = context.octokit.issues.createComment(issueComment);
+        const result = await context.octokit.issues.createComment(issueComment);
         context.log.info("New comment created");
         context.log.info(result);
+
+        // 2. Send new issue to Server
+        const newIssueRequest = {
+          issueUrl: context.payload.issue.url,
+          repositoryUrl: context.payload.issue.repository_url,
+          issueHtmlUrl: context.payload.issue.html_url,
+          number: context.payload.issue.number,
+          userLogin: context.payload.issue.user.login,
+          userId: context.payload.issue.user.id,
+          userAvatarUrl: context.payload.issue.user.avatar_url,
+          userHtmlUrl: context.payload.issue.user.html_url,
+          issueState: context.payload.issue.state,
+          issueAssignee: context.payload.issue.assignee,
+          issueBody: context.payload.issue.body,
+          issueTitle: context.payload.issue.title,
+          zebraAmount: amount,
+          zebraCommentId: result.data.id,
+          zebraCommentUrl: result.data.url,
+          zebraCommentHtmlUrl: result.data.html_url
+        }
+
+        context.log.info(newIssueRequest);
+
+        const x = await openIssue(newIssueRequest);
+        context.log.info(x);
+        /*    .then(
+                (result) => {
+                  context.log.info(result)
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                  context.log.info(error)
+                }
+            );
+
+         */
 
         return result;
       }
